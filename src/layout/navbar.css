@@ -1,0 +1,20 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
+}
+
+ul {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+}
+ul li {
+  padding: 0 35px;
+}
+a {
+  text-decoration: none;
+}
+.loginBtn {
+  margin-right: 20px;
+}

@@ -1,0 +1,38 @@
+.form {
+  width: 100%;
+}
+
+.formContainer {
+  width: 100%;
+  /* margin: 0 auto; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.nameAndSurname {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 350px;
+  margin-bottom: 5px;
+}
+.inputContainer {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+}
+.inputContainer input {
+  height: 30px;
+  padding: 0 5px;
+}
+label {
+  padding-left: 5px;
+  display: block;
+}
+form button {
+  margin-top: 20px;
+  width: 350px;
+  padding: 8px 13px;
+}
