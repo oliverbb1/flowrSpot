@@ -1,0 +1,47 @@
+.flower-cont {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.flower-up {
+  background-color: white;
+  margin-top: 15px;
+  margin-right: 10px;
+  margin-left: auto;
+  padding: 7px;
+  border-radius: 50%;
+}
+.flower-down {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.flower-name {
+  font-size: 25px;
+  font-weight: 900;
+  margin: 0 0 5px 0;
+  background-color: black;
+  padding: 3px 15px;
+
+  opacity: 0.6;
+}
+.flower-latin {
+  background-color: black;
+  margin: 0 auto;
+  font-style: italic;
+  font-size: 20px;
+  margin: 0px 0 20px 0;
+  opacity: 0.6;
+  padding: 5px 15px;
+}
+.flower-sighting {
+  margin-bottom: 15px;
+  padding: 7px 15px;
+  border-radius: 20px;
+  background-color: black;
+  color: white;
+  opacity: 0.6;
+  font-size: 18px;
+}

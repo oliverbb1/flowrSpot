@@ -1,5 +1,8 @@
 .form {
-  width: 100%;
+  /* width: 100%; */
+  margin: auto;
+  max-width: 400px;
+  /* padding: 20px 0; */
 }
 
 .formContainer {
@@ -9,6 +12,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: aliceblue;
+  padding: 10px 0;
+}
+.formContainer h1 {
+  margin-top: 0px;
 }
 .nameAndSurname {
   display: flex;
@@ -35,4 +43,27 @@ form button {
   margin-top: 20px;
   width: 350px;
   padding: 8px 13px;
+}
+/* .modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: aliceblue;
+  height: auto;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 255, 0.322);
+  padding: 0px 30px;
+}
+.congratulations {
+  font-size: 21px;
+}
+.modal button {
+  padding: 3px 15px;
+  margin-bottom: 20px;
+} */
+.error-message {
+  color: red;
+  padding: 0 20px;
+  text-align: center;
 }

@@ -1,5 +1,9 @@
 import { API } from "../shared/api";
 
+export const logoutUser = () => {
+  return API.post("logout");
+};
+
 export const userService = {
   loginUser: async (email, password) => {
     const data = await API.post("users/login", {
@@ -27,7 +31,7 @@ export const userService = {
     return data;
   },
   logoutUser: async () => {
-    await API.post("logout");
+    // await API.post("logout");
     return true;
   },
 };

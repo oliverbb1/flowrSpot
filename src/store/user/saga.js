@@ -13,12 +13,13 @@ function* loginHandler(action) {
   try {
     const { email, password } = action.payload;
     const { data } = yield call(userService.loginUser, email, password);
-    const userData = data;
+    const userData = data.auth_token;
     localStorage.setItem("accessToken", data.auth_token);
     console.log(userData);
     yield put(setUser(userData));
   } catch (error) {
     console.log(error);
+    yield put(setRegisterFailure(error.response.data.error));
   }
 }
 
@@ -26,17 +27,18 @@ function* registerHandler(action) {
   try {
     const { email, password, first_name, last_name, date_of_birth } =
       action.payload;
-    console.log(action.payload);
+    // console.log(action.payload);
     const { data } = yield call(
       userService.registerUser,
       first_name,
       last_name,
       date_of_birth,
-      password, // Ovdje smo zamijenili mjesto passworda i emaila
+      password,
       email
     );
-    // console.log
-    localStorage.setItem("accessToken", data.auth_token);
+    const userData = data;
+    yield put(setUser(userData));
+    // localStorage.setItem("accessToken", data.auth_token);
   } catch (error) {
     console.log(error);
     yield put(setRegisterFailure(error.response.data.error));
@@ -47,8 +49,10 @@ function* logoutHandler() {
   try {
     yield call(userService.logoutUser);
     localStorage.removeItem("accessToken");
+    yield put(setUser(null));
   } catch (error) {
     console.log(error);
+    // yield put(setRegisterFailure(error.response.data.message));
   }
 }
 

@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { performUserLogin } from "../store/user/slice";
+import { selectErrorMessage } from "../store/user/selectors";
 
 const SignIn = () => {
   const dispatch = useDispatch();
-
+  const error = useSelector(selectErrorMessage);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(performUserLogin({ email, password }));
-    // console.log(`Email: ${email} Password: ${password}`);
+
     setEmail("");
     setPassword("");
   };
@@ -43,6 +44,7 @@ const SignIn = () => {
             />
           </div>
           <button type="submit">Login to your Account</button>
+          {error && <p className="error-message">{error}</p>}
         </div>
       </form>
     </div>
