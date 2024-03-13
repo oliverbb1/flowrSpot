@@ -26,11 +26,11 @@ const NavBar = () => {
           <li>
             <a href="#">Latest Sightings</a>
           </li>
-          {user && (
+          {
             <li>
               <a href="/favorite">Favorites</a>
             </li>
-          )}
+          }
 
           <div>
             {user ? (

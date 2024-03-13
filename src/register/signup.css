@@ -4,7 +4,9 @@
   max-width: 400px;
   /* padding: 20px 0; */
 }
-
+.postion-r {
+  position: relative;
+}
 .formContainer {
   width: 100%;
   /* margin: 0 auto; */
@@ -21,9 +23,12 @@
 .nameAndSurname {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 350px;
+  align-items: center;
   margin-bottom: 5px;
+}
+.nameAndSurname input {
+  height: 30px;
+  padding: 0 5px;
 }
 .inputContainer {
   width: 350px;
@@ -44,24 +49,6 @@ form button {
   width: 350px;
   padding: 8px 13px;
 }
-/* .modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: aliceblue;
-  height: auto;
-  text-align: center;
-  border: 1px solid rgba(0, 0, 255, 0.322);
-  padding: 0px 30px;
-}
-.congratulations {
-  font-size: 21px;
-}
-.modal button {
-  padding: 3px 15px;
-  margin-bottom: 20px;
-} */
 .error-message {
   color: red;
   padding: 0 20px;

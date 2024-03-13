@@ -1,17 +1,26 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { performUserRegister } from "../store/user/slice";
 import { useSelector } from "react-redux";
 import { selectErrorMessage } from "../store/user/selectors";
+import { useNavigate } from "react-router-dom";
+import Modal from "../layout/Modal";
 import "./signup.css";
 
 const SignUp = () => {
-  // const [showModal, setShowModal] = useState(false);
-  // const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const error = useSelector(selectErrorMessage);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (error) {
+      setShowModal(true);
+    }
+  }, [error]);
+
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
@@ -28,8 +37,16 @@ const SignUp = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    // if (
+    //   !user.first_name ||
+    //   !user.last_name ||
+    //   !user.email ||
+    //   !user.date_of_birth ||
+    //   !user.password
+    // ) {
+    //   console.log("Please fill in all fields");
+    // }
     dispatch(performUserRegister(user));
-    // setShowModal(true);
     setUser({
       first_name: "",
       last_name: "",
@@ -38,13 +55,24 @@ const SignUp = () => {
       password: "",
     });
   };
-  // const handleModalOKClick = () => {
-  //   setShowModal(false);
-  //   navigate("/login");
-  // };
+  const closeModal = () => {
+    navigate("/login");
+
+    setShowModal(false);
+  };
 
   return (
-    <div className="position-r">
+    <div>
+      <div className="positon-r">
+        {showModal && !error && (
+          <Modal
+            title="Congratulations!"
+            content="You have successfully signed
+          up for FlowrSpot!”"
+            onClose={closeModal}
+          />
+        )}
+      </div>
       <form className="form" onSubmit={handleSubmit}>
         <div className="formContainer">
           <h1>Create an Account</h1>
@@ -110,13 +138,6 @@ const SignUp = () => {
           {error && <p className="error-message">{error}</p>}
         </div>
       </form>
-      {/* {!error && showModal && (
-        <div className="modal">
-          <p className="congratulations">Congratulations!</p>
-          <p>You have successfully signed up for FlowrSpot!</p>
-          <button onClick={handleModalOKClick}>OK</button>
-        </div>
-      )} */}
     </div>
   );
 };
