@@ -3,12 +3,24 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { performUserLogin } from "../store/user/slice";
 import { selectErrorMessage } from "../store/user/selectors";
+import { useNavigate } from "react-router-dom";
+import Modal from "../layout/Modal";
 
 const SignIn = () => {
-  const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
   const error = useSelector(selectErrorMessage);
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (error) {
+      setShowModal(true);
+    }
+  }, [error]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(performUserLogin({ email, password }));
@@ -16,8 +28,27 @@ const SignIn = () => {
     setEmail("");
     setPassword("");
   };
+
+  const handleClose = () => {
+    setShowModal(false);
+    navigate("/");
+  };
+  const handleConfirm = () => {
+    navigate("/me");
+  };
   return (
     <div>
+      <div className="positon-r">
+        {showModal && !error && (
+          <Modal
+            title="Congratulations!"
+            content="You have successfully signed
+          up for FlowrSpot!”"
+            onClose={handleClose}
+            onConfirm={handleConfirm}
+          />
+        )}
+      </div>
       <form className="form" onSubmit={submitHandler}>
         <div className="formContainer">
           <h1>Welcome Back</h1>
