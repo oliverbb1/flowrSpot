@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { performUserRegister } from "../store/user/slice";
 import { useSelector } from "react-redux";
-import { selectErrorMessage } from "../store/user/selectors";
+import { selectErrorMessage, selectUser } from "../store/user/selectors";
 import { useNavigate } from "react-router-dom";
 import Modal from "../layout/Modal";
 import "./signup.css";
@@ -13,10 +13,12 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const error = useSelector(selectErrorMessage);
+  const selectedUser = useSelector(selectUser);
   const dispatch = useDispatch();
+  console.log(error);
 
   useEffect(() => {
-    if (error) {
+    if (error === false) {
       setShowModal(true);
     }
   }, [error]);
@@ -64,7 +66,7 @@ const SignUp = () => {
   return (
     <div>
       <div className="positon-r">
-        {showModal && !error && (
+        {showModal && error && (
           <Modal
             title="Congratulations!"
             content="You have successfully signed

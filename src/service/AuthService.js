@@ -10,7 +10,7 @@ export const userService = {
       email,
       password,
     });
-    console.log(data);
+    // console.log(data);
     return data;
   },
   registerUser: async (
@@ -27,11 +27,20 @@ export const userService = {
       password,
       email,
     });
-    console.log(data);
+    // console.log(data);
     return data;
   },
   logoutUser: async () => {
     // await API.post("logout");
     return true;
+  },
+  getCurrentUser: async () => {
+    try {
+      const data = await API.get("/users/me");
+      console.log(data.data.user);
+      return data.data.user;
+    } catch (error) {
+      console.log("API Error:", error);
+    }
   },
 };

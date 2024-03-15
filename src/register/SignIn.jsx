@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { performUserLogin } from "../store/user/slice";
-import { selectErrorMessage } from "../store/user/selectors";
+import { selectErrorMessage, selectUser } from "../store/user/selectors";
 import { useNavigate } from "react-router-dom";
 import Modal from "../layout/Modal";
 
@@ -10,16 +10,17 @@ const SignIn = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const error = useSelector(selectErrorMessage);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    if (error) {
+    if (user && user !== null) {
       setShowModal(true);
     }
-  }, [error]);
+  }, [user]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -34,16 +35,16 @@ const SignIn = () => {
     navigate("/");
   };
   const handleConfirm = () => {
-    navigate("/me");
+    navigate("/profile");
   };
   return (
     <div>
       <div className="positon-r">
-        {showModal && !error && (
+        {showModal && (
           <Modal
             title="Congratulations!"
-            content="You have successfully signed
-          up for FlowrSpot!”"
+            content="You have successfully logged
+            into FlowrSpot!"
             onClose={handleClose}
             onConfirm={handleConfirm}
           />

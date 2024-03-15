@@ -7,7 +7,7 @@ import Flowers from "./components/Flowers";
 import Favorite from "./components/Favorites";
 import SingleFlower from "./components/SingleFlower";
 import AllFlowers from "./pages/AllFlowers";
-
+import Profile from "./pages/Profile";
 function App() {
   return (
     <div>
@@ -15,6 +15,7 @@ function App() {
         <Route path="/register" element={<SignUp />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/" element={<AllFlowers />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

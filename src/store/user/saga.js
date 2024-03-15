@@ -4,7 +4,9 @@ import {
   performUserLogin,
   performUserLogout,
   performUserRegister,
+  performGetCurrentUser,
   setUser,
+  setCurrentUser,
   setRegisterFailure,
 } from "./slice";
 
@@ -56,8 +58,20 @@ function* logoutHandler() {
   }
 }
 
+function* getCurrentUserHandler({ payload }) {
+  try {
+    const data = yield call(userService.getCurrentUser, payload);
+    let user = data;
+    yield put(setCurrentUser(user));
+    console.log(user);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export function* watchUsers() {
   yield takeLatest(performUserLogin.type, loginHandler);
   yield takeLatest(performUserLogout.type, logoutHandler);
   yield takeLatest(performUserRegister.type, registerHandler);
+  yield takeLatest(performGetCurrentUser.type, getCurrentUserHandler);
 }

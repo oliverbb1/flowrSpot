@@ -1,0 +1,26 @@
+.userInfo {
+  width: 30%;
+  padding: 20px 40px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+.absolute {
+  position: absolute;
+  right: 15px;
+}
+.userInfoFlex {
+  display: flex;
+  align-items: center;
+}
+.userInfoFlex img {
+  width: 90px;
+  margin-right: 40px;
+}
+
+.userInfoDown h1 {
+  margin-top: 0;
+}
+.userInfoDown p {
+  margin-bottom: 5px;
+}
