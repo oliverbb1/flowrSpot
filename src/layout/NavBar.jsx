@@ -1,6 +1,7 @@
 import React from "react";
 import "./navbar.css";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { performUserLogout } from "../store/user/slice";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/user/selectors";
@@ -8,11 +9,12 @@ import { selectUser } from "../store/user/selectors";
 const NavBar = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const logoutHandler = () => {
     dispatch(performUserLogout());
+    navigate("/login");
   };
 
-  // const token = localStorage.getItem("accessToken");
   return (
     <div className="navbar">
       <div className="logo">
@@ -26,11 +28,10 @@ const NavBar = () => {
           <li>
             <a href="#">Latest Sightings</a>
           </li>
-          {
-            <li>
-              <a href="/favorite">Favorites</a>
-            </li>
-          }
+
+          <li>
+            <a href="/favorite">Favorites</a>
+          </li>
 
           <div>
             {user ? (
