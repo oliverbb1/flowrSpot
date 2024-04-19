@@ -37,10 +37,31 @@ export const userService = {
   getCurrentUser: async () => {
     try {
       const data = await API.get("/users/me");
-      console.log(data.data.user);
+      // console.log(data.data.user);
       return data.data.user;
     } catch (error) {
-      console.log("API Error:", error);
+      // console.log("API Error:", error);
+    }
+  },
+  editUser: async (
+    first_name,
+    last_name,
+    password,
+    password_confirmation,
+    date_of_birth
+  ) => {
+    try {
+      const data = await API.put("/users/me", {
+        first_name,
+        last_name,
+        password,
+        password_confirmation,
+        date_of_birth,
+      });
+      console.log(data.data);
+      return data;
+    } catch (error) {
+      console.log(error.response.data);
     }
   },
 };

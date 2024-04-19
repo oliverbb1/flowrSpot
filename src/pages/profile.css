@@ -24,3 +24,12 @@
 .userInfoDown p {
   margin-bottom: 5px;
 }
+.logoutbtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logoutbtn button {
+  font-size: 19px;
+  padding: 8px 22px;
+}

@@ -5,6 +5,7 @@ const middlewareActions = {
   performUserLogout: () => {},
   performUserRegister: () => {},
   performGetCurrentUser: () => {},
+  performUpdateUser: () => {},
 };
 
 const userSlice = createSlice({
@@ -38,5 +39,6 @@ export const {
   setRegisterFailure,
   setCurrentUser,
   setUser,
+  performUpdateUser,
 } = userSlice.actions;
 export default userSlice.reducer;

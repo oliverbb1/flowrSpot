@@ -8,6 +8,7 @@ import {
   setUser,
   setCurrentUser,
   setRegisterFailure,
+  performUpdateUser,
 } from "./slice";
 
 function* loginHandler(action) {
@@ -63,8 +64,35 @@ function* getCurrentUserHandler({ payload }) {
     const data = yield call(userService.getCurrentUser, payload);
     let user = data;
     yield put(setCurrentUser(user));
-    console.log(user);
+    // console.log(user);
   } catch (error) {
+    // console.log(error);
+  }
+}
+
+function* updateUser(action) {
+  try {
+    const {
+      first_name,
+      last_name,
+      password,
+      password_confirmation,
+      date_of_birth,
+    } = action.payload;
+    console.log(action.payload);
+    yield call(
+      userService.editUser,
+      first_name,
+      last_name,
+      password,
+      password_confirmation,
+      date_of_birth
+    );
+    // yield put(setCurrentUser)
+  } catch (error) {
+    console.log(error);
+    // yield put
+
     console.log(error);
   }
 }
@@ -74,4 +102,5 @@ export function* watchUsers() {
   yield takeLatest(performUserLogout.type, logoutHandler);
   yield takeLatest(performUserRegister.type, registerHandler);
   yield takeLatest(performGetCurrentUser.type, getCurrentUserHandler);
+  yield takeLatest(performUpdateUser.type, updateUser);
 }
