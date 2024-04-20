@@ -11,3 +11,7 @@
 .p-a button {
   padding: 5px 15px;
 }
+.closeBtn {
+  width: 30%;
+  margin: 0 auto;
+}

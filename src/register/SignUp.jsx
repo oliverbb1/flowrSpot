@@ -3,25 +3,17 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { performUserRegister } from "../store/user/slice";
 import { useSelector } from "react-redux";
-import { selectErrorMessage, selectUser } from "../store/user/selectors";
+import { selectErrorMessage, selectModal } from "../store/user/selectors";
 import { useNavigate } from "react-router-dom";
 import Modal from "../layout/Modal";
 import "./signup.css";
 
 const SignUp = () => {
-  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-
   const error = useSelector(selectErrorMessage);
-  const selectedUser = useSelector(selectUser);
   const dispatch = useDispatch();
+  const modal = useSelector(selectModal);
   console.log(error);
-
-  useEffect(() => {
-    if (error === false) {
-      setShowModal(true);
-    }
-  }, [error]);
 
   const [user, setUser] = useState({
     first_name: "",
@@ -40,39 +32,35 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(performUserRegister(user));
-    setUser({
-      first_name: "",
-      last_name: "",
-      email: "",
-      date_of_birth: "",
-      password: "",
-    });
+    if (error) {
+      setUser({
+        first_name: "",
+        last_name: "",
+        email: "",
+        date_of_birth: "",
+        password: "",
+      });
+    }
   };
   const closeModal = () => {
     navigate("/login");
-
-    setShowModal(false);
+    // setShowModal(false);
   };
   const createParagraphsFromText = (text) => {
-    const sentences = text.split(". ");
-    const paragraphs = sentences.map((sentence, index) => (
-      <p key={index}>{sentence}</p>
-    ));
-    return paragraphs;
+    if (text) {
+      const sentences = text.split(". ");
+      const paragraphs = sentences.map((sentence, index) => (
+        <p key={index}>{sentence}</p>
+      ));
+      return paragraphs;
+    } else {
+      return null;
+    }
   };
 
   return (
     <div>
-      <div className="positon-r">
-        {showModal && error && (
-          <Modal
-            title="Congratulations!"
-            content="You have successfully signed
-          up for FlowrSpot!”"
-            onClose={closeModal}
-          />
-        )}
-      </div>
+      {/* <div className="positon-r"></div> */}
       <form className="form" onSubmit={handleSubmit}>
         <div className="formContainer">
           <h1>Create an Account</h1>
@@ -135,8 +123,15 @@ const SignUp = () => {
           </div>
 
           <button type="submit">Create Account</button>
-          {error && (
+          {!modal && (
             <p className="error-message">{createParagraphsFromText(error)}</p>
+          )}
+          {modal && (
+            <Modal
+              title="Congratulations!"
+              content="You have successfully register, please login"
+              onClose={closeModal}
+            />
           )}
         </div>
       </form>

@@ -17,7 +17,6 @@ const EditProfile = () => {
   const modal = useSelector(selectModal);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(modal);
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -54,7 +53,6 @@ const EditProfile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(performUpdateUser(formData));
-    console.log(modal);
   };
 
   const formatErrorMessages = (errorMessages) => {

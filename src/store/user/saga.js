@@ -32,8 +32,7 @@ function* registerHandler(action) {
   try {
     const { email, password, first_name, last_name, date_of_birth } =
       action.payload;
-    // console.log(action.payload);
-    const { data } = yield call(
+    const data = yield call(
       userService.registerUser,
       first_name,
       last_name,
@@ -41,14 +40,19 @@ function* registerHandler(action) {
       password,
       email
     );
-    const userData = data;
-    yield put(setUser(userData));
-    // localStorage.setItem("accessToken", data.auth_token);
-    console.log(userData);
+    const userData = data.data.auth_token;
+    if (userData) {
+      yield put(setModal(true));
+      yield delay(1000);
+      window.location.href = "/login";
+    } else {
+    }
   } catch (error) {
-    console.log(error);
     yield put(setRegisterFailure(error.response.data.error));
   }
+
+  // yield put(setModal(true));
+  // yield delay(1000);
 }
 
 function* logoutHandler() {

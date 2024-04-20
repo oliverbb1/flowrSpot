@@ -22,7 +22,9 @@ const Modal = ({ title, content, onClose, onConfirm }) => {
       <div className="p-a">
         <h2>{title}</h2>
         <p>{content}</p>
-        <button onClick={onClose}>OK</button>
+        <button className="closeBtn" onClick={onClose}>
+          OK
+        </button>
         {onConfirm && <button onClick={onConfirm}>PROFILE</button>}
       </div>
     </div>
