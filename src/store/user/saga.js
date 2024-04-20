@@ -9,6 +9,8 @@ import {
   setCurrentUser,
   setRegisterFailure,
   performUpdateUser,
+  setEditUserError,
+  setModal,
 } from "./slice";
 
 function* loginHandler(action) {
@@ -42,6 +44,7 @@ function* registerHandler(action) {
     const userData = data;
     yield put(setUser(userData));
     // localStorage.setItem("accessToken", data.auth_token);
+    console.log(userData);
   } catch (error) {
     console.log(error);
     yield put(setRegisterFailure(error.response.data.error));
@@ -64,43 +67,44 @@ function* getCurrentUserHandler({ payload }) {
     const data = yield call(userService.getCurrentUser, payload);
     let user = data;
     yield put(setCurrentUser(user));
-    // console.log(user);
+    console.log(user);
   } catch (error) {
     // console.log(error);
   }
 }
 
-function* updateUser(action) {
-  try {
-    const {
-      first_name,
-      last_name,
-      password,
-      password_confirmation,
-      date_of_birth,
-    } = action.payload;
-    console.log(action.payload);
-    yield call(
-      userService.editUser,
-      first_name,
-      last_name,
-      password,
-      password_confirmation,
-      date_of_birth
-    );
-    // yield put(setCurrentUser)
-  } catch (error) {
-    console.log(error);
-    // yield put
+function* updateUserHandler(action) {
+  const {
+    first_name,
+    last_name,
+    password,
+    password_confirmation,
+    date_of_birth,
+  } = action.payload;
 
-    console.log(error);
+  const data = yield call(
+    userService.editUser,
+    first_name,
+    last_name,
+    password,
+    password_confirmation,
+    date_of_birth
+  );
+
+  if (data.error) {
+    yield put(setEditUserError(data.error));
+  } else {
+    yield put(setModal(true));
+    yield delay(1000);
+    window.location.href = "/profile";
   }
 }
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 export function* watchUsers() {
   yield takeLatest(performUserLogin.type, loginHandler);
   yield takeLatest(performUserLogout.type, logoutHandler);
   yield takeLatest(performUserRegister.type, registerHandler);
   yield takeLatest(performGetCurrentUser.type, getCurrentUserHandler);
-  yield takeLatest(performUpdateUser.type, updateUser);
+  yield takeLatest(performUpdateUser.type, updateUserHandler);
 }

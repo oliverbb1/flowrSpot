@@ -1,0 +1,27 @@
+.editForm {
+}
+.editFormContainer {
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  margin: 0 auto;
+  width: 30%;
+}
+.editFormContainer input {
+  padding: 7px 10px;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 9px;
+}
+.editFormContainer label {
+  margin-left: 10%;
+}
+#date_of_birth {
+  margin-bottom: 10px;
+}
+.editFormContainer button {
+  margin: 10px auto;
+  width: 35%;
+}

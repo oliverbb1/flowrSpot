@@ -9,3 +9,9 @@ export const selectUser = (state) => {
 export const selectCurrentUser = (state) => {
   return state.users.currentUser;
 };
+export const selectEditErrorMessage = (state) => {
+  return state.users.editError;
+};
+export const selectModal = (state) => {
+  return state.users.editModal;
+};

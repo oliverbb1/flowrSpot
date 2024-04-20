@@ -14,6 +14,8 @@ const userSlice = createSlice({
     user: "",
     currentUser: {},
     error: null,
+    editError: null,
+    editModal: false,
   },
   reducers: {
     setUser: (state, action) => {
@@ -26,6 +28,12 @@ const userSlice = createSlice({
     setRegisterFailure: (state, action) => {
       state.user = null;
       state.error = action.payload;
+    },
+    setEditUserError: (state, action) => {
+      state.editError = action.payload;
+    },
+    setModal: (state, action) => {
+      state.editModal = action.payload;
     },
     ...middlewareActions,
   },
@@ -40,5 +48,7 @@ export const {
   setCurrentUser,
   setUser,
   performUpdateUser,
+  setEditUserError,
+  setModal,
 } = userSlice.actions;
 export default userSlice.reducer;

@@ -58,10 +58,11 @@ export const userService = {
         password_confirmation,
         date_of_birth,
       });
-      console.log(data.data);
+      console.log(data);
       return data;
     } catch (error) {
       console.log(error.response.data);
+      return error.response.data;
     }
   },
 };
