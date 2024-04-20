@@ -51,6 +51,10 @@ form button {
 }
 .error-message {
   color: red;
-  padding: 0 20px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.alignCenter {
   text-align: center;
 }

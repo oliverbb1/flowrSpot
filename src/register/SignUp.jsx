@@ -39,15 +39,6 @@ const SignUp = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (
-    //   !user.first_name ||
-    //   !user.last_name ||
-    //   !user.email ||
-    //   !user.date_of_birth ||
-    //   !user.password
-    // ) {
-    //   console.log("Please fill in all fields");
-    // }
     dispatch(performUserRegister(user));
     setUser({
       first_name: "",
@@ -61,6 +52,13 @@ const SignUp = () => {
     navigate("/login");
 
     setShowModal(false);
+  };
+  const createParagraphsFromText = (text) => {
+    const sentences = text.split(". ");
+    const paragraphs = sentences.map((sentence, index) => (
+      <p key={index}>{sentence}</p>
+    ));
+    return paragraphs;
   };
 
   return (
@@ -137,7 +135,9 @@ const SignUp = () => {
           </div>
 
           <button type="submit">Create Account</button>
-          {error && <p className="error-message">{error}</p>}
+          {error && (
+            <p className="error-message">{createParagraphsFromText(error)}</p>
+          )}
         </div>
       </form>
     </div>

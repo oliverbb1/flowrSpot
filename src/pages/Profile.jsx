@@ -13,8 +13,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(performGetCurrentUser());
-  }, [currentUser]);
-  // console.log(currentUser);
+  }, []);
 
   const logoutHandler = () => {
     dispatch(performUserLogout());
